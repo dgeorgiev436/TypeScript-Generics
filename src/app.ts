@@ -25,3 +25,24 @@ function merge<T extends object, U extends object>(objA: T, objB: U) {
 
 const mergedObj = merge({name: "Will", hobbies: ["Runing", "Reading"]}, {age: 30})
 console.log(mergedObj.age);
+
+
+interface Lengthy {
+	length: number
+}
+
+
+// Declare countAndDescribe function that takes an argument of generic type T that extends the Lengthy Interface to make sure it has a length property.
+// Returns an array of two elements. First of type T and second of type string
+function countAndDescribe<T extends Lengthy>(element: T): [T, string]{
+	let description = "Got no value"
+	
+	if(element.length === 1) {
+		description = "Got 1 element"
+	}else if (element.length > 1){
+		description = `Got ${element.length} elements.`
+	}
+	return [element, description]
+}
+
+console.log(countAndDescribe(["Sports", "Cooking"]))
