@@ -54,3 +54,49 @@ function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U){
 
 
 extractAndConvert({name: "Alex"}, "name");
+
+
+// ****************************************** CREATING GENERIC CLASS ******************************************
+
+// Generic type allows us to be more flexible while remaining strongly typed
+class DataStorage<T extends string | number | boolean> {
+	private data: T[] = [];
+	
+	addItem(item: T){
+		this.data.push(item);
+	}
+	
+	removeItem(item: T){
+		
+		if(this.data.indexOf(item) === -1) {
+			return;
+		}
+		this.data.splice(this.data.indexOf(item), 1);
+	}
+	
+	getItems(){
+		return [...this.data];
+	}
+}
+
+// Storing strings
+const textStorage = new DataStorage<string>();
+textStorage.addItem("Maximus");
+textStorage.addItem("Patricus");
+textStorage.removeItem("Maximus");
+console.log(textStorage.getItems());
+
+// Storing numbers
+const numberStorage = new DataStorage<number>();
+numberStorage.addItem(10);
+numberStorage.addItem(55555);
+numberStorage.removeItem(10);
+console.log(numberStorage.getItems());
+
+
+// const objectStorage = new DataStorage<object>();
+// const maxObj = {name: "Max"};
+// objectStorage.addItem(maxObj);
+// objectStorage.addItem({name: "Marcus"});
+// objectStorage.removeItem(maxObj);
+// console.log(objectStorage.getItems());
