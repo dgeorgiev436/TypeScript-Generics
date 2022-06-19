@@ -2,7 +2,7 @@
 
 // Arrays are of generic type in TS
 // names is a array of strings
-const names: Array<string> = ["Max", "Manuel"];
+const staffNames: Array<string> = ["Max", "Manuel"];
 
 // Promises are of generic type in TS
 // declcaring that the promise is of type Promise and it will resolve in a string
@@ -100,3 +100,26 @@ console.log(numberStorage.getItems());
 // objectStorage.addItem({name: "Marcus"});
 // objectStorage.removeItem(maxObj);
 // console.log(objectStorage.getItems());
+
+
+
+// ****************************************** GENERIC UTILITY TYPES ******************************************
+
+interface CourseGoal {
+	title: string;
+	description: string;
+	date: Date;
+}
+
+function createCourseGoal(title: string, description: string, date: Date): CourseGoal {
+// 	Partial allows us to make everything optional temporarely
+	let courseGoal: Partial<CourseGoal> = {};
+	courseGoal.title = title
+	courseGoal.description = description
+	courseGoal.date = date
+	
+	return courseGoal as CourseGoal;
+}
+
+// Readonly doesn't allow us to change properties for extra stricktness
+const names: Readonly<string[]> = ["Max", "Anna"];
